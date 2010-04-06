@@ -411,7 +411,7 @@ module ActiveRecord
                   base_tags.delete(*old_tags)                
                 end
  
-                new_tags.reject! { |tag| self.taggings.any? { |tagging|
+                new_tags.reject! { |tag| self.taggings.reload.any? { |tagging|
                     tagging.tag_id      == tag.id &&
                     tagging.tagger_id   == (owner ? owner.id : nil) &&
                     tagging.tagger_type == (owner ? owner.class.to_s : nil) &&
